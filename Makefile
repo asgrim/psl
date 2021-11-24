@@ -34,9 +34,12 @@ security-analysis:                                                              
 unit-tests:                                                                     ## run unit test suite
 	./vendor/bin/phpunit -c config/phpunit.xml.dist
 
+mutation-tests:                                                                     ## run mutation tests
+	./vendor/bin/roave-infection-static-analysis-plugin run --configuration=config/infection.json.dist --psalm-config=config/psalm.xml
+
 code-coverage: unit-tests                                                       ## generate and upload test coverage metrics to https://coveralls.io/
 	composer global require php-coveralls/php-coveralls
-	php-coveralls -x tests/logs/clover.xml -o tests/logs/coveralls-upload.json -v
+	php-coveralls -x var/clover.xml -o var/coveralls-upload.json -v
 
 docs-generate:                                                                  ## regenerate docs
 	php docs/documenter.php
@@ -44,4 +47,4 @@ docs-generate:                                                                  
 docs-check:                                                                     ## checks if docs are up to date
 	php docs/documenter.php check
 
-check: coding-standard-check static-analysis security-analysis unit-tests docs-check  ## run quick checks for local development iterations
+check: coding-standard-check static-analysis security-analysis unit-tests mutation-tests docs-check  ## run quick checks for local development iterations

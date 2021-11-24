@@ -1,0 +1,24 @@
+{
+    "source": {
+        "directories": [
+            "src/Psl/"
+        ],
+        "excludes": [
+            "Async",
+            "RandomSequence",
+            "IO/Stream",
+            "Internal",
+            "{.*/Internal/.*}"
+        ]
+    },
+    "logs": {
+        "text": "php://stderr",
+        "github": true,
+        "badge": {
+            "branch": "/^\\d+\\.\\d+\\.x$/"
+        }
+    },
+    "timeout": 10,
+    "minMsi": 93,
+    "minCoveredMsi": 100
+}
